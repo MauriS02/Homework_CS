@@ -42,7 +42,7 @@ try
     massiv[2, 1] = secondname2_1;
     massiv[2, 2] = post2_2;
 
-       Console.WriteLine($"Количество пользователей:{massiv[0, 0].Length-1}");
+       //Console.WriteLine($"Количество пользователей:{massiv[0,0].Length}");
 
        Console.WriteLine($"Выберете имя пользователя, данные которого хотите вывести на экран: {name0_0}, {name1_0}, {name2_0}");
     string showinfo = Console.ReadLine();
