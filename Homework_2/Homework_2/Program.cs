@@ -3,7 +3,6 @@ using System.Numerics;
 
 int[] massiv = new int[5];
 int error = 0;
-string one = "Jnhb";
 
 try
 {
