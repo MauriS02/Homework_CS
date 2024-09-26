@@ -3,6 +3,7 @@ using System.Numerics;
 
 int[] massiv = new int[5];
 int error = 0;
+var q = new Exception("Значение не может быть отрицательным");
 
 try
 {
@@ -23,14 +24,23 @@ try
 
     if (massiv[0] < 0 || massiv[1] < 0 || massiv[2] < 0 || massiv[3] < 0 || massiv[4] < 0)
     {
-        throw new Exception("Значение не может быть отрицательным");
+        
+        throw q;
         error = 1;
     }
 }
-catch
+catch (Exception q1)
 {
-    Console.WriteLine("Ошибка ввода");
-    error = 1;
+    if (q1 == q)
+    {
+        Console.WriteLine("Значение не может быть отрицательным");
+        error = 1;
+    }
+    else
+    {
+        Console.WriteLine($"Ошибка ввода: {q1.Message}");
+        error = 1;
+    }
 }
 
 if (error == 0)
