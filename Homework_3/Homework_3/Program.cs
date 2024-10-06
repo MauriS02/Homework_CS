@@ -5,9 +5,11 @@ try
 {
     for (int i = 0; i <= massiv.Length; i++)
     {
-        Console.WriteLine(massiv[i]);
+        Console.WriteLine("Ожидание ввода...");
+
         var vvod = Console.ReadLine();
         var parse = int.TryParse(vvod, out int q);
+        Console.WriteLine(massiv[i]);
 
         if (i == massiv.Length)
         {
@@ -22,7 +24,7 @@ try
         }
         if (vvod == "q")
         {
-            Console.WriteLine($"Список ошибок:{massiv[0]}");
+            Console.WriteLine($"Список ошибок:{massiv[i]}");
 
             for (y = 1; y == massiv.Length; y++)
             {
@@ -36,8 +38,9 @@ try
             Console.WriteLine("1.Продолжить");
             Console.WriteLine("2.Очистить");
             Console.WriteLine("3.Выйти");
+            string vvod1 = Console.ReadLine();
 
-            switch (vvod)
+            switch (vvod1)
             {
                 case ("1"):
                     Console.WriteLine("Продолжаем");
@@ -51,7 +54,7 @@ try
 
                 case ("3"):
                     Console.WriteLine("Выходим");
-                    Console.WriteLine($"Список ошибок:{massiv[0]}");
+                    Console.WriteLine($"Список ошибок:{massiv[i]}");
                     break;
             }
         }
