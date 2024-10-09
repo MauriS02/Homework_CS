@@ -41,38 +41,21 @@ else
 Console.WriteLine("Введите номер простого числа");
 
 var vvod = Console.ReadLine();
-var parse = int.TryParse(vvod, out int q);
-int number = 0;
-int count = 1;
-int score = 0;
-int final = 0;
-int j = 0;
+var parse = int.TryParse(vvod, out int n);
+bool flag = false;
+int count = 0;
 
-if (parse == true)
+while (count < n)
 {
-    for (int i = 1; i <= q; i++)
+    for (int i = 2; i <= n; i++)
     {
-        for (j = 1; i <= j; j++)
+        if (n % i == 0)
         {
-            if (i % j == 0)
-            {
-                count++;
-            }
-            else
-            {
-                count--;
-            }
+            count++;
         }
-        if (count == 2)
+        else
         {
-            score++;
-            if (score == q)
-            {
-                Console.WriteLine($"Ваше простое число: {41} ");
-                break;
-            }
+            flag = false;
         }
     }
 }
-
-
