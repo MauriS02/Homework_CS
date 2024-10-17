@@ -14,52 +14,91 @@ class Program
 {
     static void Main(string[] args)
     {
+        int cipa = 0;
+        int FoodW = 0;
+        int FoodB = 0;
+        int FoodY = 0;
+
         Console.WriteLine("У вас три голодные курицы.");
-        Console.WriteLine("Выберите номер действия, которое хотите выполнить:");
-        Console.WriteLine("1. Покормить курицу");
-        Console.WriteLine("2. Забрать яйцо");
-        Console.WriteLine("3. Ничего не делать");
 
-        var vvod = Console.ReadLine();
-        var parse = int.TryParse(vvod, out int q);
-
-        switch (q)
+        while (FoodW <= 0 || FoodB <=0 || FoodY <= 0)
         {
-            case 1:
-                Console.WriteLine("");
-                Food(Chicken.WhiteChicken);
-                break;
-            case 2:
-                Console.WriteLine("");
-                Food(Chicken.BlackChicken);
-                break;
-            case 3:
-                Console.WriteLine("");
-                Food(Chicken.YellowChicken);
-                break;
+            Console.WriteLine("Новый день! Выберите номер действия, которое хотите выполнить:");
+            Console.WriteLine("1. Покормить курицу");
+            Console.WriteLine("2. Забрать яйцо");
+            Console.WriteLine("3. Ничего не делать");
 
+            var vvod = Console.ReadLine();
+            var parse = int.TryParse(vvod, out int q);
+
+            switch (q)
+            {
+                case 1:
+
+                    Console.WriteLine("Выберите курицу которую хотите покормить:");
+                    Console.WriteLine($"1. Белая курица \n 2. Черная курица \n 3. Желтая курица");
+
+                    var ChooseChicken = Console.ReadLine();
+                    var ChooseChickenParse = int.TryParse(vvod, out int y);
+
+                    var CipaY = (Chicken)y;
+
+                    switch (CipaY)
+                    {
+                        case Chicken.WhiteChicken:
+                            Food(Chicken.WhiteChicken);
+                            break;
+
+                        case Chicken.BlackChicken:
+                            Food(Chicken.BlackChicken);
+
+                            break;
+
+                        case Chicken.YellowChicken:
+                            Food(Chicken.YellowChicken);
+
+                            break;
+                    }
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+
+            }
         }
 
 
         void Food(Chicken cipa)
         {
-            Console.WriteLine("Выберите курицу которую хотите покормить:");
-            Console.WriteLine($"1.{cipa}");
+            Console.WriteLine($"Вы выбрали {cipa}.");
+            Console.WriteLine("Сколько зерен давать курице? \n (Введите значение от 1 до 5)");
+            int Food = int.Parse(Console.ReadLine());
+            
+            switch (cipa)
+            {
+                case Chicken.WhiteChicken:
+                    FoodW = FoodW + Food;
+                    Console.WriteLine($"У курицы {cipa}, {Food} зерен");
+                    break;
+
+                case Chicken.BlackChicken:
+                    FoodB = FoodB + Food;
+                    Console.WriteLine($"У курицы {cipa}, {Food} зерен");
+                    break;
+
+                case Chicken.YellowChicken:
+                    Food = FoodY + Food;
+                    Console.WriteLine($"У курицы {cipa}, {Food} зерен");
+                    break;
+            }
             Console.WriteLine("Кормим курицу");
 
         }
     }
-
-
-    /* void CollectEgg()
-     {
-
-     }
-
-     void DoNothing()
-     {
-     }*/
-
     enum Chicken
     {
         WhiteChicken = 0,
@@ -73,72 +112,4 @@ class Program
     TakeEgg = 2,
     Nothing = 3
     }
-
-    int hungry = 0;
-    int satiety = 0;
-    int eggs = 0;
-
- 
 }
-
-/*enum Chicken
-{
-    WhiteChicken = 0,
-    BlackChicken = 1,
-    YellowChicken = 2
-}
-
-enum Action
-{
-    Feed = 1,
-    TakeEgg = 2,
-    Nothing = 3
-}
-
-int hungry = 0;
-int satiety = 0;
-int eggs = 0;
-
-Console.WriteLine("У вас три голодные курицы.");
-Console.WriteLine("Выберите номер действия, которое хотите выполнить:");
-Console.WriteLine("1. Покормить курицу");
-Console.WriteLine("2. Забрать яйцо");
-Console.WriteLine("3. Ничего не делать");
-
-var vvod = Console.ReadLine();
-var parse = int.TryParse(vvod, out int q);
-
-switch (q)
-{
-    case 1:
-        Console.WriteLine("");
-        break;
-    case 2:
-        Console.WriteLine("");
-        break;
-    case 3:
-        Console.WriteLine("");
-        break;
-
-}
-
-
-void Food()
-{
-    Console.WriteLine("Выберите курицу которую хотите покормить:");
-    Console.WriteLine($"1.{Chicken}");
-    Console.WriteLine("Кормим курицу");
-
-}
-
-
-void CollectEgg()
-{
-
-}
-
-void DoNothing()
-{
-
-}*/
-
