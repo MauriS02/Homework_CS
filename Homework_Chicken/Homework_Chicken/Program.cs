@@ -23,149 +23,156 @@ class Program
         int DaysCount = 0;
 
         Console.WriteLine("У вас три курицы. Необходимо кормить их и собирать яйца");
-
-        while (FoodW >= 0 || FoodB >= 0 || FoodY >= 0)
+        try
         {
-            Console.WriteLine("Новый день! Выберите номер действия, которое хотите выполнить:");
-            Console.WriteLine("1. Покормить курицу");
-            Console.WriteLine("2. Забрать яйцо");
-            Console.WriteLine("3. Ничего не делать");
-
-            var vvod = Console.ReadLine();
-            var parse = int.TryParse(vvod, out int q);
-
-            switch (q)
+            while (FoodW >= 0 && FoodB >= 0 && FoodY >= 0)
             {
-                case 1:
-                    Console.WriteLine("-----------------------------------------------------------------------");
-                    Console.WriteLine("Выберите курицу которую хотите покормить:");
-                    Console.WriteLine($"1. Белая курица \n2. Черная курица \n3. Желтая курица");
+                Console.WriteLine("Новый день! Выберите номер действия, которое хотите выполнить:");
+                Console.WriteLine("1. Покормить курицу");
+                Console.WriteLine("2. Забрать яйцо");
+                Console.WriteLine("3. Ничего не делать");
 
-                    var ChooseChicken = Console.ReadLine();
-                    var ChooseChickenParse = int.TryParse(ChooseChicken, out int x);
+                var vvod = Console.ReadLine();
+                var parse = int.TryParse(vvod, out int q);
 
-                    var CipaX = (Chicken)x;
+                switch (q)
+                {
+                    case 1:
+                        Console.WriteLine("-----------------------------------------------------------------------");
+                        Console.WriteLine("Выберите курицу которую хотите покормить:");
+                        Console.WriteLine($"1. Белая курица \n2. Черная курица \n3. Желтая курица");
 
-                    switch (CipaX)
-                    {
-                        case Chicken.WhiteChicken:
-                            Food(Chicken.WhiteChicken);
-                            break;
+                        var ChooseChicken = Console.ReadLine();
+                        var ChooseChickenParse = int.TryParse(ChooseChicken, out int x);
 
-                        case Chicken.BlackChicken:
-                            Food(Chicken.BlackChicken);
+                        var CipaX = (Chicken)x;
 
-                            break;
+                        switch (CipaX)
+                        {
+                            case Chicken.WhiteChicken:
+                                Food(Chicken.WhiteChicken);
+                                break;
 
-                        case Chicken.YellowChicken:
-                            Food(Chicken.YellowChicken);
+                            case Chicken.BlackChicken:
+                                Food(Chicken.BlackChicken);
 
-                            break;
-                    }
-                    break;
+                                break;
 
-                case 2:
-                    Console.WriteLine("-----------------------------------------------------------------------");
-                    Console.WriteLine("Выберите курицу у которой мы собираем яйца");
-                    Console.WriteLine($"1. Белая курица \n 2. Черная курица \n 3. Желтая курица");
+                            case Chicken.YellowChicken:
+                                Food(Chicken.YellowChicken);
 
-                    ChooseChicken = Console.ReadLine();
-                    ChooseChickenParse = int.TryParse(ChooseChicken, out int y);
+                                break;
+                        }
+                        break;
 
-                    var CipaY = (Chicken)y;
+                    case 2:
+                        Console.WriteLine("-----------------------------------------------------------------------");
+                        Console.WriteLine("Выберите курицу у которой мы собираем яйца");
+                        Console.WriteLine($"1. Белая курица \n 2. Черная курица \n 3. Желтая курица");
 
-                    switch (CipaY)
-                    {
-                        case Chicken.WhiteChicken:
-                            Egg(Chicken.WhiteChicken);
+                        ChooseChicken = Console.ReadLine();
+                        ChooseChickenParse = int.TryParse(ChooseChicken, out int y);
 
-                            break;
-                        case Chicken.BlackChicken:
-                            Egg(Chicken.BlackChicken);
+                        var CipaY = (Chicken)y;
 
-                            break;
-                        case Chicken.YellowChicken:
-                            Egg(Chicken.YellowChicken);
+                        switch (CipaY)
+                        {
+                            case Chicken.WhiteChicken:
+                                Egg(Chicken.WhiteChicken);
 
-                            break;
-                    }
+                                break;
+                            case Chicken.BlackChicken:
+                                Egg(Chicken.BlackChicken);
 
-                    break;
-                case 3:
-                    Console.WriteLine("-----------------------------------------------------------------------");
-                    Console.WriteLine("Пропуск хода");
-                    break;
+                                break;
+                            case Chicken.YellowChicken:
+                                Egg(Chicken.YellowChicken);
+
+                                break;
+                        }
+
+                        break;
+                    case 3:
+                        Console.WriteLine("-----------------------------------------------------------------------");
+                        Console.WriteLine("Пропуск хода");
+                        break;
+                }
+                Console.WriteLine("-----------------------------------------------------------------------");
+                Console.WriteLine("День закончился!");
+                FoodW--;
+                FoodB--;
+                FoodY--;
+                EggW++;
+                EggB++;
+                EggY++;
+                DaysCount++;
+                Console.WriteLine($"Вы держитесь уже {DaysCount} дней!");
+                Console.WriteLine($"Показатели:\n WhiteChicken: {FoodW} - зерен. {EggW} - яиц \n BlackChicken: {FoodB} - зерен. {EggB} - яиц \n YellowChicken: {FoodY} - зерен. {EggY} - яиц");
+                Console.WriteLine($"Всего вы собрали: {EggCount} яиц");
+                Console.WriteLine("-----------------------------------------------------------------------");
             }
-            Console.WriteLine("-----------------------------------------------------------------------");
-            Console.WriteLine("День закончился!");
-            FoodW--;
-            FoodB--;
-            FoodY--;
-            EggW++;
-            EggB++;
-            EggY++;
-            DaysCount++;
-            Console.WriteLine($"Вы держитесь уже {DaysCount} дней!");
-            Console.WriteLine($"Показатели:\n WhiteChicken: {FoodW} - зерен. {EggW} - яиц \n BlackChicken: {FoodB} - зерен. {EggB} - яиц \n YellowChicken: {FoodY} - зерен. {EggY} - яиц");
-            Console.WriteLine($"Всего вы собрали: {EggCount} яиц");
-            Console.WriteLine("-----------------------------------------------------------------------");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Одна из ваших куриц умерла. \n GameOver");
+            Console.ResetColor();
+
+
+            void Food(Chicken cipa)
+            {
+                Console.WriteLine($"Вы выбрали {cipa}.");
+                Console.WriteLine("Сколько зерен давать курице? \n (Введите значение от 1 до 5)");
+                int Food = int.Parse(Console.ReadLine());
+
+                switch (cipa)
+                {
+                    case Chicken.WhiteChicken:
+                        FoodW = FoodW + Food;
+                        Console.WriteLine($"Теперь у курицы {cipa}, {FoodW} зерен");
+                        break;
+
+                    case Chicken.BlackChicken:
+                        FoodB = FoodB + Food;
+                        Console.WriteLine($"Теперь у курицы {cipa}, {FoodB} зерен");
+                        break;
+                    case Chicken.YellowChicken:
+                        FoodY = FoodY + Food;
+                        Console.WriteLine($"Теперь у курицы {cipa}, {FoodY} зерен");
+                        break;
+                }
+                Console.WriteLine("Кормим курицу");
+            }
+
+            void Egg(Chicken cipa)
+            {
+                Console.WriteLine($"Вы выбрали {cipa}.");
+
+
+                switch (cipa)
+                {
+                    case Chicken.WhiteChicken:
+                        Console.WriteLine($"Сейчас у {cipa}, {EggW} яиц");
+                        EggCount += EggW;
+                        EggW = 0;
+                        break;
+                    case Chicken.BlackChicken:
+                        Console.WriteLine($"Сейчас у {cipa}, {EggB} яиц");
+                        EggCount += EggB;
+                        EggB = 0;
+
+                        break;
+                    case Chicken.YellowChicken:
+                        Console.WriteLine($"Сейчас у {cipa}, {EggY} яиц");
+
+                        EggCount += EggY;
+                        EggY = 0;
+
+                        break;
+                }
+                Console.WriteLine("Собираем яйца...");
+            }
         }
-        Console.WriteLine("Одна из ваших куриц умерла. \n GameOver");
-
-
-        void Food(Chicken cipa)
+        catch
         {
-            Console.WriteLine($"Вы выбрали {cipa}.");
-            Console.WriteLine("Сколько зерен давать курице? \n (Введите значение от 1 до 5)");
-            int Food = int.Parse(Console.ReadLine());
-
-            switch (cipa)
-            {
-                case Chicken.WhiteChicken:
-                    FoodW = FoodW + Food;
-                    Console.WriteLine($"Теперь у курицы {cipa}, {FoodW} зерен");
-                    break;
-
-                case Chicken.BlackChicken:
-                    FoodB = FoodB + Food;
-                    Console.WriteLine($"Теперь у курицы {cipa}, {FoodB} зерен");
-                    break;
-                case Chicken.YellowChicken:
-                    FoodY = FoodY + Food;
-                    Console.WriteLine($"Теперь у курицы {cipa}, {FoodY} зерен");
-                    break;
-            }
-            Console.WriteLine("Кормим курицу");
-        }
-
-        void Egg(Chicken cipa)
-        {
-            Console.WriteLine($"Вы выбрали {cipa}.");
-
-
-            switch (cipa)
-            {
-                case Chicken.WhiteChicken:
-                    Console.WriteLine($"Сейчас у {cipa}, {EggW} яиц");
-                    EggCount += EggW;
-                    EggW = 0;
-
-                    break;
-                case Chicken.BlackChicken:
-                    Console.WriteLine($"Сейчас у {cipa}, {EggB} яиц");
-                    EggCount += EggB;
-                    EggB = 0;
-
-                    break;
-                case Chicken.YellowChicken:
-                    Console.WriteLine($"Сейчас у {cipa}, {EggY} яиц");
-                    
-                    EggCount += EggY;
-                    EggY = 0;
-
-                    break;
-            }
-            Console.WriteLine("Собираем яйца...");
+            Console.WriteLine("Непредвиденная ошибка");
         }
     }
 
