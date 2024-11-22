@@ -12,7 +12,7 @@ class Farm
         Cow cow = new Cow();
         Chicken chicken = new Chicken();
         Goat goat = new Goat();
-
+        int money = 0;
 
         while (cow.starve >= 0 && chicken.starve >= 0 && goat.starve >= 0)
         {
@@ -82,7 +82,7 @@ class Farm
                             break;
                         case 3:
                             Console.WriteLine("Собираем молоко у коз");
-                            cow.Collecting();
+                            goat.Collecting();
                             break;
                     }
                     break;
@@ -103,7 +103,7 @@ class Farm
                     {
                         case 1:
                             Console.WriteLine("Покупаем Корову");
-                            cow.Buying();
+                            cow.Buying(money);
                             break;
 
                         case 2:
@@ -120,6 +120,65 @@ class Farm
                     break;
 
                 case 4:
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine("-----------------------------------------------------------------------");
+                    Console.ResetColor();
+                    Console.WriteLine("Кол-во ресурсов на складе:");
+                    Console.WriteLine($" Коровье молоко {cow.storage} \n Куриные яйца {chicken.storage} \n Козье молоко {goat.storage}");
+                    Console.WriteLine("\nВыберите продукцию, которую хотите продать:");
+                    Console.WriteLine("1. Коровье молоко");
+                    Console.WriteLine("2. Куриные яйца");
+                    Console.WriteLine("3. Козье молоко");
+                    Console.WriteLine("4. Продать все");
+
+                    vvod = Console.ReadLine();
+                    parse = int.TryParse(vvod, out q);
+
+                    switch (q)
+                    {
+                        case 1:
+
+                            for (int i = 0; i <= cow.storage; i++)
+                            {
+                                money += 10;
+                            }
+                            cow.storage = 0;
+                            break;
+                        case 2:
+                            for (int i = 0; i <= chicken.storage; i++)
+                            {
+                                money += 5;
+                            }
+                            chicken.storage = 0;
+                            break;
+                        case 3:
+                            for (int i = 0; i <= goat.storage; i++)
+                            {
+                                money += 20;
+                            }
+                            goat.storage = 0;
+                            break;
+                        case 4:
+                            while (cow.storage != 0 && chicken.storage != 0 && goat.storage != 0)
+                            {
+                                if (cow.storage != 0)
+                                {
+                                    money += 10;
+                                    cow.storage -= 1;
+                                }
+                                else if (chicken.storage != 0)
+                                {
+                                    money += 5;
+                                    chicken.storage -= 1;
+                                }
+                                if (goat.storage != 0)
+                                {
+                                    money += 20;
+                                }
+                            }
+                            Console.WriteLine("Продукция продана!");
+                            break;
+                    }
 
                     break;
             }
@@ -133,8 +192,21 @@ class Farm
             Console.WriteLine($"Вы держитесь уже {DaysCount} дней!");
             Console.ResetColor();
 
-            cow.starve--; chicken.starve--; goat.starve--;
-            
+            if (cow.count_animal.Length != 0)
+            {
+                cow.starve--;
+            }
+
+            if (chicken.count_animal.Length != 0)
+            {
+                chicken.starve--;
+            }
+
+            if (goat.count_animal.Length != 0)
+            {
+                goat.starve--;
+            }
+
             for (int i = 0; i < cow.count_animal.Length; i++)
             {
                 cow.resource++;
@@ -152,15 +224,19 @@ class Farm
             Console.WriteLine("-----------------------------------------------------------------------");
             Console.ResetColor();
             Console.WriteLine("Показатели Вашей фермы:");
-            Console.WriteLine($" Коровы:\n Кол-во коров - {cow.count_animal} \n Уровень голода - {cow.starve}");
+            Console.WriteLine($" Коровы:\n Кол-во коров - {cow.count_animal.Length} \n Уровень голода - {cow.starve}");
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("..........");
             Console.ResetColor();
-            Console.WriteLine($" Курицы:\n Кол-во куриц- {chicken.count_animal} \n Уровень голода - {chicken.starve}");
+            Console.WriteLine($" Курицы:\n Кол-во куриц- {chicken.count_animal.Length} \n Уровень голода - {chicken.starve}");
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("..........");
             Console.ResetColor();
-            Console.WriteLine($" Козы:\n Кол-во коз- {goat.count_animal} \n Уровень голода - {goat.starve}");
+            Console.WriteLine($" Козы:\n Кол-во коз- {goat.count_animal.Length} \n Уровень голода - {goat.starve}");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("..........");
+            Console.ResetColor();
+            Console.WriteLine($"Кол-во денег - {money}");
 
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("-----------------------------------------------------------------------");
@@ -181,7 +257,7 @@ class Farm
 class Cow
 {
     public int starve = 3;
-    public int[] count_animal = new int[2];
+    public int[] count_animal = new int[1];
     public int resource = 0;
     public int storage = 0;
 
@@ -192,12 +268,20 @@ class Cow
         Console.WriteLine($"Текущий уровень голода: {starve}");
 
     }
-    public void Buying()
+    public int Buying(int x)
     {
-        count_animal = new int[count_animal.Length + 1];
-        Console.WriteLine("Корова куплена");
-        Console.WriteLine($"Сейчас у вас {count_animal.Length}");
+
+        if (x > 40)
+        {
+            count_animal = new int[count_animal.Length + 1];
+            Console.WriteLine("Корова куплена");
+            Console.WriteLine($"Сейчас у вас {count_animal.Length}");
+            x -= 40;
+            
+        }
+        return x;
     }
+
     public void Collecting()
     {
         storage = storage + resource;
@@ -218,7 +302,7 @@ class Cow
 class Chicken
 {
     public int starve = 3;
-    public int[] count_animal = new int[2];
+    public int[] count_animal = new int[0];
     public int resource = 0;
     public int storage = 0;
 
@@ -255,7 +339,7 @@ class Chicken
 class Goat
 {
     public int starve = 3;
-    public int[] count_animal = new int[2];
+    public int[] count_animal = new int[0];
     public int resource = 0;
     public int storage = 0;
 
